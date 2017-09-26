@@ -16,9 +16,8 @@ require_relative "TodoManager.rb"
 
 
 get '/todos' do
-	# id=params[:id]
-	# puts id
-	# "INDEX"
+	
+	"INDEX"
 	ToDoManager.index
 end
 
@@ -30,20 +29,10 @@ post '/todos/:newelement' do
 end
 
 
-# get '/todos/:id' do
-
-# 	id = params[:id]
-
-
-	
-	
-# end
-
 put '/todos/:id' do
 	
 	id=params[:id]
 	update=params[:update]
-	# puts id
 	"UPDATE"
 	ToDoManager.update(id.to_i,update)
 
@@ -52,7 +41,6 @@ end
 
 get '/todos/:id' do #ID is a dynamic URL attribute
 	id=params[:id]
-	puts id
 	"SHOW"
 	ToDoManager.show(id.to_i)
 end	

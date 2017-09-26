@@ -2,7 +2,7 @@ require 'sinatra'
 class ToDoManager
   
   
-  @@todos=["Buy some milk!" , "Feed the cat", ]  #this is a class variable (not instance)
+  @@todos=["<ol> <li>Buy some milk! </li>" , "<li> Feed the cat </li>", "</ol>"]  #this is a class variable (not instance)
   
   
   def self.index # return everything inside the class todo . self. is a static method inside                the class
@@ -15,17 +15,33 @@ class ToDoManager
   end
   
   def self.create (new_todo)
-    @@todos.push(new_todo)
+    @@todos.pop()
+
+    @@todos.push("<li>" + new_todo + "</li>")
+    @@todos.push("</ol>")
     # or use the shovel
     # @@todos << new_todo
   end
   
   def self.delete (id)
+    
+
     @@todos.delete_at(id)
+    if id===0
+      @@todos.shift('<ol>')
+    elsif id===(@@todos.length+1)
+      @@todos.push('</ol>')
+    end
+
   end
   
   def self.update(id ,new_todo)
-    @@todos[id]=new_todo
+    @@todos[id]="<li>" + new_todo + "</li>"
+     if id===0
+      @@todos.shift('<ol>')
+    elsif id===(@@todos.length+1)
+      @@todos.push('</ol>')
+    end
   end
     
 end
